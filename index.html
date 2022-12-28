@@ -13,10 +13,123 @@
 
     <body> 
         
-        <div class="outer-container">
-            <div class="inner-container">
-                <h1 class="title">Книжная полка</h1>
-                <div class="bookshelf" id="bookshelf"></div>
+        <div class="outer-container" id="body">
+            <div class="inner-container width-100">
+
+                <a href="#" class="scroll"><img src="icons/icon-scroll.png"/></a>
+
+                <div class="header flex space-between">
+                    <h1 class="title">Книжная полка</h1>
+                    <button class="add-button general-button" id="add-button">Добавить книгу</button>
+                </div>
+
+                <div class="input-container-row flex search-container">
+                    <input type="text" class="input" id="input-search" placeholder="Поиск">
+                    <button class="general-icon icon-delete icon cursor" id="icon-delete"><img src="icons/icon-delete.png" class="image-delete icon "/></button>
+                    <button class="general-icon icon-search icon cursor" id="icon-search"><img src="icons/icon-search.png" class="image-delete icon "/></button>
+                </div>
+
+                <div class="input-container-row flex sort-book width-100">
+                    <fieldset class="width-100">
+                        <legend>Жанр книги</legend>
+                        <select  class="genre-select cursor width-100" id="genre-menu">
+                            <option value="Все книги" id="all-book">Все книги</option>
+                            <option value="Не выбран">Не выбран</option>
+                            <option value="Художественная литература">Художественная литература</option>
+                            <option value="Наука">Наука</option>
+                            <option value="Образование">Образование</option>
+                            <option value="Увлечения">Увлечения</option>
+                        </select>
+                    </fieldset>
+                </div>
+
+                <div class="add-modal" id="add-modal">
+                    <div class="add-modal-content flex-container" id="add-modal-content"> 
+                        <p class="modal-title">Добавить новую книгу</p>
+
+                        <div class="input-container flex width-100">
+                            <p class="label">Название книги</p>
+                            <input id="name" class="input" placeholder="Это поле обязательно для заполнения" />
+                        </div>
+
+                        <div class="input-container flex width-100">
+                            <p class="label">Автор/авторы книги</p>
+                            <input id="author" class="input"/>
+                        </div>
+
+                        <div class="input-container flex width-100">
+                            <p class="label">Жанр книги</p>
+                            <select  class="input select" id="genre">
+                                <option>Не выбран</option>
+                                <option>Художественная литература</option>
+                                <option>Наука</option>
+                                <option>Образование</option>
+                                <option>Увлечения</option>
+                            </select>
+                        </div>
+                        
+                        <div class="input-container-row flex width-100">
+                            <div class="input-container flex width-100">
+                                <p class="label">Год издания книги</p>
+                                <input id="year" class="input" />
+                            </div>
+                            <div class="input-container flex width-100"> 
+                                <p class="label">Ссылка на изображение</p>
+                                <input id="imageLink" class="input" placeholder="формат .jpeg(.jpg) или .png" />
+                            </div>
+                        </div>
+                        <button class="general-button modal-button width-100" id="save-button">Добавить книгу в список</button>
+                    </div>
+                </div>
+
+                <div class="add-modal" id="add-modal-update">
+                    <div class="add-modal-content flex-container"> 
+                        <p class="modal-title">Редактировать книгу</p>
+
+                        <div class="input-container flex width-100">
+                            <p class="label">Название книги</p>
+                            <input id="name-update" class="input" />
+                            <button class="general-icon icon-delete icon cursor " id="icon-delete-name"><img src="icons/icon-delete.png" class="image-delete icon "/></button>
+
+                        </div>
+
+                        <div class="input-container flex width-100">
+                            <p class="label">Автор/авторы книги</p>
+                            <input id="author-update" class="input" />
+                            <button class="general-icon icon-delete icon cursor " id="icon-delete-author"><img src="icons/icon-delete.png" class="image-delete icon "/></button>
+                        </div>
+
+                        <div class="input-container flex width-100">
+                            <p class="label">Жанр книги</p>
+                            <select  class="input select" id="genre-update">
+                                <option class="option">Не выбран</option>
+                                <option class="option">Художественная литература</option>
+                                <option class="option">Наука</option>
+                                <option class="option">Образование</option>
+                                <option class="option">Увлечения</option>
+                            </select>
+                        </div>
+                        
+                        <div class="input-container-row flex width-100">
+                            <div class="input-container flex width-100">
+                                <p class="label">Год издания книги</p>
+                                <input id="year-update" class="input" />
+                                <button class="general-icon icon-delete icon cursor " id="icon-delete-year"><img src="icons/icon-delete.png" class="image-delete icon "/></button>
+                            </div>
+                            <div class="input-container flex width-100"> 
+                                <p class="label">Ссылка на изображение</p>
+                                <input id="imageLink-update" class="input" placeholder="формат .jpeg(.jpg) или .png" />
+                                <button class="general-icon icon-delete icon cursor " id="icon-delete-image"><img src="icons/icon-delete.png" class="image-delete icon "/></button>
+                            </div>
+                        </div>
+                        <div class="input-container-button flex width-100" id="button-container">
+                            <button class="general-button modal-button width-modal-button" id="cancel-button">Отменить</button>
+                            <button class="general-button modal-button width-modal-button" id="edit-button">Обновить</button> 
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bookshelf flex" id="bookshelf"></div>
             </div>
         </div>
 
