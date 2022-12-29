@@ -60,8 +60,8 @@ function renderBook(arr) {
       </div>
     `
   })
-  forEachUpdateButton(arr) // привязываем кнопку "Изменить" 
-  forEachDeleteButton(arr) // привязываем кнопку "Удалить"
+  forEachUpdateButton(arr) 
+  forEachDeleteButton(arr) 
 }
 
 // Кнопки "Добавить книгу" и кнопка "Сoхранить" (применительно к модальному окну) 
@@ -81,7 +81,7 @@ const closeModalClick = (event) => {
 
 // для LocalStorage
 function saveToLocalStorage() {
-  const bookJson = JSON.stringify(books) // сохраняем в LocalStorage
+  const bookJson = JSON.stringify(books) 
   localStorage.setItem('books', bookJson) 
 }
 
@@ -113,8 +113,7 @@ function saveBook() {
   }
 
   if (nameValue.length > 0) {
-    
-    let maxId = books.reduce((max, book) => book.id > max ? book.id : max, 0) // ищем наибольший id, чтобы не было совпадений по id в случае удаления и добавления новых книг
+    let maxId = books.reduce((max, book) => book.id > max ? book.id : max, 0) 
     let bookId = maxId + 1
     
     const bookshelfElement = {
@@ -137,26 +136,13 @@ function saveBook() {
   }
 }
 
-// для нажатия на кнопку Enter
-document.addEventListener('keyup', function(event) {
-  if(event.code === 'Enter') {
-    saveBook()
-  }
-}) 
-// для нажатия на кнопку Escape
-document.addEventListener('keyup', function(event) {
-    if(event.code === 'Escape') {
-      closeModal()
-    }
-}) 
-
 // служебные функции для кнопки "Изменить"
 // открытие модального окна
 const addModalUpdate = document.getElementById('add-modal-update')
 const openModalUpdate = () => addModalUpdate.style.display = 'flex'
 // для нажатия на серый фон
 const closeModalUpdateClick = (event) => {
-  if (event.target == addModalUpdate) {  
+  if (event.target === addModalUpdate) {  
     return addModalUpdate.style.display = 'none' 
   } 
 }
@@ -175,10 +161,9 @@ function forEachUpdateButton(arr) {
 // кнопка "Изменить"
 function updateBook(id) {
   const book = books.find((booksId) => {
-    return booksId.id === id // нашли id книги
+    return booksId.id === id 
   })
-  
-  const index = books.indexOf(book) // по index передаем соответствующие значения
+  const index = books.indexOf(book) 
 
   document.getElementById("name-update").value = books[index].title
   document.getElementById("author-update").value = books[index].authors
@@ -187,25 +172,9 @@ function updateBook(id) {
   document.getElementById("imageLink-update").value = books[index].image
 
   openModalUpdate()  
-
-  clearInput() // для очистки поля
-
+  clearInput() 
   const makeEditBook = () => editBook(book.id, makeEditBook)
   document.getElementById('edit-button').addEventListener('click', makeEditBook)
-
-  // для нажатия на кнопку Enter
-  document.addEventListener('keyup', function(event) {
-    if(event.code === 'Enter') {
-      editBook(book.id)
-    }
-  }) 
-
-  // для нажатия на кнопку Escape
-  document.addEventListener('keyup', function(event) {
-    if(event.code === 'Escape') {
-      closeModalUpdate()
-    }
-  }) 
 }
 
 // для кнопки "Отмена"
@@ -256,7 +225,7 @@ function editBook(id, makeEditBook) {
     imageValueUpdate = "https://static.vecteezy.com/system/resources/previews/012/921/741/large_2x/round-button-for-gallery-image-landscape-nature-photo-line-icon-turquoise-background-free-vector.jpg"
   }
 
-  const newBook = {  // новый объект массива
+  const newBook = {  
     id: id, 
     title: nameValueUpdate,
     authors: authorValueUpdate,
@@ -293,10 +262,8 @@ function deleteBook(id) {
   const book = books.find((bookId) => {
     return bookId.id === id
   }) 
-
   const bookIndex = books.indexOf(book) 
   books.splice(bookIndex, 1) 
-
   renderBook(books) 
   saveToLocalStorage()
 }
@@ -334,17 +301,15 @@ function searchBook() {
 
 // фильтрация книг по жанрам
 const listGenre = document.getElementById('genre-menu')
-listGenre.addEventListener("change", function() {
+function sortBook () {
   let bookFilter = books.filter((book) => book.genre == listGenre.value, 0)
   renderBook(bookFilter)
   if(listGenre.value === 'Все книги') {
     renderBook(books)
   }
-})
+}
 
 function initApp() {
-  renderBook(books) 
-
   addButton.addEventListener('click', openModal)
   addModal.addEventListener('click', closeModalClick)
   saveButton.addEventListener('click', saveBook)
@@ -352,6 +317,7 @@ function initApp() {
   cancelButton.addEventListener('click', closeModalUpdate)
   document.getElementById('icon-delete').addEventListener('click', iconDeleteFunction)
   inputSearch.addEventListener('input', searchBook)
+  listGenre.addEventListener("change", sortBook)
 
   const bookJson = localStorage.getItem('books') 
   if(bookJson) {
